@@ -1,0 +1,20 @@
+    "id": 2,
+    "image": "https:\/\/api.intern.d-tt.nl\/uploads\/house1.jpg",
+    "price": 123,
+    "rooms": {
+        "bedrooms": 1,
+        "bathrooms": 1
+    },
+    "size": 500,
+    "description": "oui",
+    "location": {
+        "street": "street",
+        "houseNumber": 20,
+        "houseNumberAddition": null,
+        "city": "assas",
+        "zip": "asasdd"
+    },
+    "createdAt": "2020-05-07",
+    "constructionYear": 2000,
+    "hasGarage": false,
+    "madeByMe": false

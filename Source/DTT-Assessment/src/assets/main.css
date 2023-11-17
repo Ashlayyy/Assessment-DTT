@@ -1,13 +1,17 @@
 @import './base.css';
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
-  font-weight: normal;
+body {
+  position: relative;
+  background: #F6F6F6;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  height: auto;
+  overflow-x: none;
 }
-
+/*
 a,
 .green {
   text-decoration: none;
@@ -33,3 +37,4 @@ a,
     padding: 0 2rem;
   }
 }
+*/
