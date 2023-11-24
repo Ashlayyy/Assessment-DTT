@@ -1,7 +1,6 @@
 <script>
 import HouseList from '../components/houseList.vue';
 import FilterComponent from '../components/filterComponent.vue';
-import DataAPI from '../components/dataAPI.vue';
 import createNewButton from '../components/createNewButton.vue';
 import sorterComponent from '../components/sorterComponent.vue';
 
@@ -20,19 +19,12 @@ export default {
         };
     },
     methods: {
-        async start () {
-            const finals = await DataAPI.methods.getData();
-            this.houses = finals;
-        },
         handleEvent (event) {
             this.searchTerm = event;
         },
         handleSortEvent (event) {
             this.sorted = event;
         }
-    },
-    async beforeMount () {
-        await this.start();
     }
 };
 </script>
@@ -92,5 +84,9 @@ export default {
 .title {
     width: 100%;
     text-align: left;
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 32px;
 }
 </style>

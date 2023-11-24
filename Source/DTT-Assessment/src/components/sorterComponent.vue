@@ -35,8 +35,13 @@ export default {
   flex: 1;
   border: none;
   padding: 10px;
-  width: 5rem;
+  width: 10rem;
   cursor: pointer;
+  color: #FFFFFF;
+  font-family: 'Montserrat';
+  font-weight: 700;
+  font-style: normal;
+  font-size: 18px;
 }
 
 .sorterButtonPrice {

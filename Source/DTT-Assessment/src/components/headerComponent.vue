@@ -1,15 +1,16 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'
+const location = useRoute();
 </script>
 
 <template>
   <section id="header__section">
     <nav id="header">
       <img alt="DTT Logo" class="logo" src="./icons/DTTIcons/img_logo_dtt@3x.png" width="148" height="50" />
-      <RouterLink class="header__link" to="/">Home</RouterLink>
-      <RouterLink class="header__link" to="/about">About</RouterLink>
-      <RouterLink class="header__link" to="/favorites">Favorites</RouterLink>
-      <RouterLink class="header__link" to="/listings">Listings</RouterLink>
+      <RouterLink :class="location.path === '/' ? 'active' : ''" class="header__link" to="/">Home</RouterLink>
+      <RouterLink :class="location.path === '/about' ? 'active' : ''" class="header__link" to="/about">About</RouterLink>
+      <RouterLink :class="location.path === '/favorites' ? 'active' : ''" class="header__link" to="/favorites">Favorites</RouterLink>
+      <RouterLink :class="location.path === '/listings' ? 'active' : ''" class="header__link" to="/listings">Listings</RouterLink>
     </nav>
   </section>
 </template>
@@ -24,6 +25,11 @@ import { RouterLink } from 'vue-router'
   margin: 0;
   padding: 0;
   position: sticky;
+  z-index: 999;
+  font-family: 'Montserrat';
+  font-weight: 500;
+  font-style: normal;
+  font-size: 18px;
 }
 
 #header {
@@ -40,7 +46,7 @@ import { RouterLink } from 'vue-router'
 
 .header__link {
   font-size: 18px;
-  color: #4A4B4C;
+  color: rgba(74, 75, 77, 0.75);
   text-decoration: none;
   transition: 0.3s all cubic-bezier(0.23, 1, 0.320, 1);
 }
@@ -53,5 +59,13 @@ import { RouterLink } from 'vue-router'
 .header__link:hover {
   color: #067BC2;
   cursor: pointer;
+}
+
+.active {
+  color: #000000;  
+  font-family: 'Montserrat';
+  font-weight: 700;
+  font-style: normal;
+  font-size: 18px;
 }
 </style>

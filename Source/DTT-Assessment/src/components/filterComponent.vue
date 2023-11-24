@@ -33,7 +33,7 @@ export default {
     align-items: center;
     justify-content: left;
     width: 22.5rem;
-    height: 2.5rem;
+    height: 2rem;
     background: #E8E8E8;
     border-radius: 0.2rem;
     gap: 1rem;
@@ -42,7 +42,7 @@ export default {
 
 .filterSearchBox, .filterSearchBox:focus, .filterSearchBox:active {
     width: 20rem;
-    height: auto;
+    height: 100%;
     border:none;
     background-image:none;
     background-color:transparent;
@@ -50,6 +50,11 @@ export default {
     -moz-box-shadow: none;
     box-shadow: none;
     outline: none;
+    line-height: 1.5rem;
+    font-family: 'open-sans';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
 }
 
 .clearImage, .searchImage {

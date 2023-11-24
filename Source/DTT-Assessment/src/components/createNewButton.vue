@@ -17,18 +17,24 @@ export default {
 <style scoped>
 .createNewLink {
   text-decoration: none;
+  text-align: center;
 }
 .createButton {
+  text-align: center;
+  font-family: 'Montserrat';
+  font-weight: 700;
+  font-style: normal;
+  font-size: 18px;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
   background-color: #EB5440;
   color: #ffffff;
-  padding: 1rem;
-  border: none;
+  padding: 0.75rem;
+  border: none; 
   cursor: pointer;
-  width: 7.5rem;
-  border-radius: 0.3rem;
+  width: 12rem;
+  border-radius: 0.5rem;
   height: 2.5rem;
   text-transform: uppercase;
   text-decoration: none;

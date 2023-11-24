@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <formComponent :mode="'create'"/>
+    <formComponent :mode="'edit'"/>
 </template>
 
 <style scoped>

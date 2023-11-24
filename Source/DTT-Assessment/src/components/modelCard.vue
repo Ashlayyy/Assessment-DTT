@@ -1,0 +1,49 @@
+<template>
+    <div class="overlay"></div>
+    <div class="modal" v-if="showModal">
+        <div v-if="showModal" class="modal-content">
+            <div class="modal-header">
+                <slot name="header"></slot>
+            </div>
+            <div class="modal-body">
+                <slot name="body"></slot>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+  export default {
+    name: 'app-modal',
+    props: {
+        showModal: Boolean
+    }
+  };
+</script>
+<style>
+    .overlay {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: rgba(0, 0, 0, 0.05);
+        z-index: 90;
+    }
+
+    .modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 30rem;
+        max-width: 100%;
+        height: 400px;
+        max-height: 100%;
+        background: #FFFFFF;
+        border-radius: 1rem;
+        overflow-x: none;
+        display: flex;
+        flex-direction: column;
+        z-index: 100;
+    }
+</style>

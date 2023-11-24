@@ -1,12 +1,13 @@
 <script>
-import HouseCard from './housecard.vue';
+import HouseCard from './houseCard.vue';
 import dataAPI from './dataAPI.vue';
-import RingLoader from 'vue-spinner/src/RingLoader.vue'
+import ClipLoader from 'vue-spinner/src/ClipLoader.vue';
+
 
 export default {
     components: {
         HouseCard,
-        RingLoader
+        ClipLoader
     },
     props: {
         searchString: String,
@@ -36,7 +37,7 @@ export default {
             this.houses = final;
             this.filteredHouses = this.houses;
             this.loaded = true;
-            this.updateSorter('price')
+            this.updateSorter('price');
         },
         updateFilter(searchTerm) {
             this.filteredHouses = this.houses.filter((house) => {
@@ -53,12 +54,21 @@ export default {
                 return aValue - bValue;
             });
             this.filteredHouses = this.sortedHouses;
+        },
+        updatePrice() {
+            for (let i = 0; i < this.houses.length; i++) {
+                const price = this.houses[i].price;
+                const formatter = new Intl.NumberFormat('de-DE');
+                this.houses[i].price = formatter.format(price);
+            }
         }
     },
     async beforeMount() {
         await this.getData();
+        this.updatePrice();
     },
     mounted() {
+        this.updatePrice();
         this.filteredHouses = this.houses;
     }
 };
@@ -73,16 +83,17 @@ export default {
                     <p>{{ resultsNumber }} results found</p>
                 </li>
                 <li class="houseCardLi" v-for="house in filteredHouses" :key="house.id">
-                    <HouseCard :streetName="house.location.street" :price="house.price" :picture="house.image"
+                    <HouseCard :streetName="house.location.street" :priceDisplay="house.price" :picture="house.image"
                         :zipCode="house.location.zip" :houseNumber="house.location.houseNumber"
                         :houseNumberAdditive="house.location.houseNumberAddition" :bedrooms="house.rooms.bedrooms"
-                        :bathrooms="house.rooms.bathrooms" :size="house.size" :city="house.location.city" />
+                        :bathrooms="house.rooms.bathrooms" :size="house.size" :city="house.location.city" :id="house.id"
+                        :made="house.madeByMe" @showModal="console.log($event)" />
                 </li>
             </ul>
         </section>
         <section v-else>
             <div v-if="this.loaded == false">
-                <ring-loader :loading="'loading'" :color="'#cc181e'" :size="'5rem'"></ring-loader>
+                <ClipLoader :color="'#cc181e'" :size="'5rem'" />
             </div>
             <div v-else>
                 <img src="../components/icons/DTTIcons/img_empty_houses@3x.png" alt="No houses found!" height="200"
@@ -133,4 +144,9 @@ export default {
 .houseText {
     width: 100%;
     text-align: center;
-}</style>
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-style: normal;
+    font-size: 18px;
+}
+</style>

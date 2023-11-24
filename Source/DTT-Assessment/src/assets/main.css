@@ -1,4 +1,4 @@
-@import './base.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;1,500&family=Open+Sans:wght@400;500;600&display=swap');
 
 body {
   position: relative;
@@ -10,31 +10,8 @@ body {
   outline: none;
   height: auto;
   overflow-x: none;
+  font-family: 'open-sans';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
 }
-/*
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
-}
-*/
