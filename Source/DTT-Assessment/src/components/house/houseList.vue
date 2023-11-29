@@ -1,6 +1,6 @@
 <script>
 import HouseCard from './houseCard.vue';
-import dataAPI from './dataAPI.vue';
+import dataAPI from '../data/dataAPI.vue';
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue';
 
 
@@ -11,7 +11,8 @@ export default {
     },
     props: {
         searchString: String,
-        sorted: String
+        sorted: String,
+        ownListings: Boolean
     },
     data() {
         return {
@@ -49,8 +50,8 @@ export default {
         },
         updateSorter(sortedProperty) {
             this.sortedHouses = this.filteredHouses.slice().sort((a, b) => {
-                const aValue = sortedProperty === 'price' ? a.price : a.size;
-                const bValue = sortedProperty === 'price' ? b.price : b.size;
+                const aValue = sortedProperty == 'price' ? a.price : a.size;
+                const bValue = sortedProperty == 'price' ? b.price : b.size;
                 return aValue - bValue;
             });
             this.filteredHouses = this.sortedHouses;
@@ -59,7 +60,7 @@ export default {
             for (let i = 0; i < this.houses.length; i++) {
                 const price = this.houses[i].price;
                 const formatter = new Intl.NumberFormat('de-DE');
-                this.houses[i].price = formatter.format(price);
+                this.houses[i].newPrice = formatter.format(price);
             }
         }
     },
@@ -77,17 +78,30 @@ export default {
 <template>
     <section class="houseList">
         <section class="houses" v-if="filteredHouses.length > 0">
-            <ul class="houseListElement">
+            <ul v-if="ownListings == true" class="houseListElement">
+                <li v-if="searchString != '' && searchString != undefined && searchString != null && resultsNumber != null && resultsNumber != ''"
+                    class="houseCardLi">
+                    <p>{{ resultsNumber }} results found</p>
+                </li>
+                <li class="houseCardLi" v-for="house in filteredHouses" :key="house.id" :class="house.madeByMe == false ? 'hide': ''">
+                    <HouseCard v-if="house.madeByMe == true" :streetName="house.location.street" :priceDisplay="house.newPrice" :picture="house.image"
+                        :zipCode="house.location.zip" :houseNumber="house.location.houseNumber"
+                        :houseNumberAdditive="house.location.houseNumberAddition" :bedrooms="house.rooms.bedrooms"
+                        :bathrooms="house.rooms.bathrooms" :size="house.size" :city="house.location.city" :id="house.id"
+                        :made="house.madeByMe" />
+                </li>
+            </ul>
+            <ul v-else class="houseListElement">
                 <li v-if="searchString != '' && searchString != undefined && searchString != null && resultsNumber != null && resultsNumber != ''"
                     class="houseCardLi">
                     <p>{{ resultsNumber }} results found</p>
                 </li>
                 <li class="houseCardLi" v-for="house in filteredHouses" :key="house.id">
-                    <HouseCard :streetName="house.location.street" :priceDisplay="house.price" :picture="house.image"
+                    <HouseCard :streetName="house.location.street" :priceDisplay="house.newPrice" :picture="house.image"
                         :zipCode="house.location.zip" :houseNumber="house.location.houseNumber"
                         :houseNumberAdditive="house.location.houseNumberAddition" :bedrooms="house.rooms.bedrooms"
                         :bathrooms="house.rooms.bathrooms" :size="house.size" :city="house.location.city" :id="house.id"
-                        :made="house.madeByMe" @showModal="console.log($event)" />
+                        :made="house.madeByMe"/>
                 </li>
             </ul>
         </section>
@@ -95,8 +109,8 @@ export default {
             <div v-if="this.loaded == false">
                 <ClipLoader :color="'#cc181e'" :size="'5rem'" />
             </div>
-            <div v-else>
-                <img src="../components/icons/DTTIcons/img_empty_houses@3x.png" alt="No houses found!" height="200"
+            <div v-else class="mobileDiv">
+                <img class="image" src="../icons/DTTIcons/img_empty_houses@3x.png" alt="No houses found!" height="200"
                     width="500">
                 <p class="houseText">
                     No results found.
@@ -148,5 +162,29 @@ export default {
     font-weight: 500;
     font-style: normal;
     font-size: 18px;
+}
+
+.hide {
+    display: none;
+    visibility: 0;
+}
+
+@media screen and (max-width: 650px), screen and (max-device-width: 650px) {
+    .houseText {
+        font-size: 14px;
+    }
+
+    .image {
+        height: 100px;
+        width: 250px;
+    }
+
+    .mobileDiv {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
 }
 </style>

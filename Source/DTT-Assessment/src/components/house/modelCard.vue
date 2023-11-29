@@ -1,5 +1,4 @@
 <template>
-    <div class="overlay"></div>
     <div class="modal" v-if="showModal">
         <div v-if="showModal" class="modal-content">
             <div class="modal-header">
@@ -45,5 +44,15 @@
         display: flex;
         flex-direction: column;
         z-index: 100;
+    }
+
+    @media screen and (max-width: 650px), screen and (max-device-width: 650px) {
+        .modal {
+            height: max-content;
+            padding-bottom: 5rem;
+            padding-right: 2rem;
+            padding-left: 2rem;
+            width: 15rem;
+        }
     }
 </style>

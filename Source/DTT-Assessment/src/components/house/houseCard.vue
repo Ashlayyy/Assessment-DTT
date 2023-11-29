@@ -1,9 +1,9 @@
 <script>
 import { RouterLink } from 'vue-router';
-import { useIdStore } from '../stores/id';
-import EditButton from './EditButton.vue';
-import DeleteButton from './DeleteButton.vue';
-import { useModalStore } from '../stores/deleteModal';
+import { useIdStore } from '../../stores/id';
+import EditButton from '../buttons/EditButton.vue';
+import DeleteButton from '../buttons/DeleteButton.vue';
+import { useModalStore } from '../../stores/deleteModal';
 
 
 export default {
@@ -51,15 +51,15 @@ export default {
           <p>{{ zipCode }} {{ city }}</p>
           <div class="property-icons">
             <div class="property-icon">
-              <img src="./icons/DTTIcons/ic_bed@3x.png" alt="Bedroom Icon" />
+              <img src="../icons/DTTIcons/ic_bed@3x.png" alt="Bedroom Icon" />
               <p>{{ bedrooms }}</p>
             </div>
             <div class="property-icon">
-              <img src="./icons/DTTIcons/ic_bath@3x.png" alt="Bathroom Icon" />
+              <img src="../icons/DTTIcons/ic_bath@3x.png" alt="Bathroom Icon" />
               <p>{{ bathrooms }}</p>
             </div>
             <div class="property-icon">
-              <img src="./icons/DTTIcons/ic_size@3x.png" alt="Size Icon" />
+              <img src="../icons/DTTIcons/ic_size@3x.png" alt="Size Icon" />
               <p>{{ size }} m2</p>
             </div>
           </div>
@@ -133,7 +133,7 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
   padding: 0.5rem;
   line-height: 1rem;
 }
@@ -148,5 +148,33 @@ export default {
   align-items: start;
   justify-content: space-between;
   width: 100%;
+}
+
+@media screen and (max-width: 650px), screen and (max-device-width: 650px) {
+  .house-card {
+    gap: 0.5rem;
+    font-size: 12px;
+  }
+
+  .house-image {
+    aspect-ratio: 1/1;
+    max-width: 5rem;
+    padding: 0;
+  }
+
+  .buttonsDivider {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  flex-direction: row;
+  height: 2.5rem;
+  width: 100%;
+  gap: 0.25rem;
+}
+
+.property-icon img {
+  height: 15px;
+  aspect-ratio: 1/1;
+}
 }
 </style>

@@ -1,7 +1,11 @@
 <template>
     <section v-if="mode == 'create'" class="formSection">
-        <goBackButton />
-        <h2 class="title">Create new listing</h2>
+        <goBackButton class="desktop" />
+        <div class="mobileDiv">
+            <goBackButton class="mobile" :message="' '"/>
+            <h2 class="title">Create new listing</h2>
+        </div>
+        <br>
         <form @submit.prevent="createListing()" class="listing-form">
             <div>
                 <label class="required inputTitle" for="street">Street name</label>
@@ -95,6 +99,7 @@
     <section v-else-if="mode == 'edit'" class="formSection">
         <goBackButton :message="'Go back to detail page'" :toGoTo="'/detail'" @click="setId(house.id)" />
         <h2 class="title">Edit listing</h2>
+        <br>
         <form @submit.prevent="createListing('edit')" class="listing-form">
             <div>
                 <label class="required inputTitle" for="street">Street name</label>
@@ -138,7 +143,7 @@
                 </div>
                 <input class="photoUpload" @change="checkPhoto($event)" name="image" id="image" type="file"
                     accept=".png, .jpg, .jpeg" />
-                <p v-if="file">Filename aquired:
+                <p v-if="file">Filename aquired: <br>
                     {{ file }}</p>
             </div>
             <div>
@@ -196,8 +201,8 @@
   
 <script>
 import { RouterLink, useRouter } from 'vue-router';
-import goBackButton from './goBackButton.vue';
-import { useIdStore } from '../stores/id';
+import goBackButton from '../buttons/goBackButton.vue';
+import { useIdStore } from '../../stores/id';
 const { setId, returnId } = useIdStore();
 
 export default {
@@ -756,6 +761,52 @@ export default {
     font-family: 'Montserrat';
     font-weight: 700;
     font-style: normal;
-    font-size: 22px;
+    font-size: 32px;
+}
+
+.mobile {
+    display: none;
+}
+
+@media screen and (max-width: 650px), screen and (max-device-width: 650px) { 
+    
+    .input {
+        font-size: 12px;
+    }
+
+    .inputTitle {
+        font-size: 12px;
+    }
+
+    .title {
+        font-size: 18px;
+    }
+
+    .desktop {
+        display: none;
+    }
+
+    .mobile {
+        display: flex;
+    }
+    .formSection {
+        padding: 0;
+        margin: 0;
+        padding-top: 1rem;
+        padding-left: 1rem;
+        padding-right: -1rem;
+    }
+
+    .mobileDiv {
+        width: 70%;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: space-between;
+    }
+
+    .photo_image {
+        height: 25%;
+    }
 }
 </style>

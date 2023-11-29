@@ -1,7 +1,7 @@
 <template>
   <RouterLink :to="toGoTo ? toGoTo : '/'" class="backText">
     <span class="divider">
-      <img class="backIcon" alt="backIcon" src="./icons/DTTIcons/ic_back_grey@3x.png">
+      <img class="backIcon" alt="backIcon" :src="color ? '/src/components/icons/DTTIcons/ic_back_white@3x.png' : '/src/components/icons/DTTIcons/ic_back_grey@3x.png'">
       <p class="backText">{{ message ? message : 'Back to overview' }}</p>
     </span>
   </RouterLink>
@@ -16,7 +16,8 @@ export default {
   },
   props: {
     message: String,
-    toGoTo: String
+    toGoTo: String,
+    color: String
   }
 }
 </script>

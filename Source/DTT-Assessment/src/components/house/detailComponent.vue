@@ -1,7 +1,14 @@
 <template>
     <main class="mainCard">
         <div class="backButton">
-            <goBackButton />
+            <goBackButton class="desktop" />
+            <goBackButton class="mobile" :message="' '" :color="'white'" />
+        </div>
+        <div class="mobileButton" v-if="house.madeByMe == true">
+            <div class="mobileButtonDivider">
+                <DeleteButton @click="deleted()" :mobile="true" />
+                <EditButton @click="setId(house.id)" :mobile="true" />
+            </div>
         </div>
         <section class="detailCard" v-if="house.location.street != ''">
             <img class="detailImage" :src="house.image" alt="Image of the house" />
@@ -71,6 +78,7 @@
         </section>
     </main>
     <appModel v-if="showModal" :showModal=showModal>
+        <div class="overlay"></div>
         <template v-slot:header>
             <section class="textSection">
                 <h2 class="headerText">Delete listing</h2>
@@ -96,14 +104,15 @@
 <script>
 import { useRouter } from 'vue-router';
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue';
-import { useIdStore } from '../stores/id';
-import goBackButton from './goBackButton.vue';
-import dataAPI from './dataAPI.vue';
-import EditButton from './EditButton.vue';
-import DeleteButton from './DeleteButton.vue';
+import { useIdStore } from '../../stores/id';
+import goBackButton from '../buttons/goBackButton.vue';
+import dataAPI from '../data/dataAPI.vue';
+import EditButton from '../buttons/EditButton.vue';
+import DeleteButton from '../buttons/DeleteButton.vue';
 import appModel from './modelCard.vue';
-import { useModalStore } from '../stores/deleteModal';
-const { returnId, setId } = useIdStore()
+import { useModalStore } from '../../stores/deleteModal';
+const { returnId, setId } = useIdStore();
+const { setState, getState } = useModalStore();
 
 export default {
     data() {
@@ -129,12 +138,12 @@ export default {
             setId(id);
         },
         deleted() {
-            const { getState } = useModalStore();
             this.showModal = getState();
             if (this.showModal != true) this.showModal = true;
         },
         async deleteHouse(id) {
             setId(id);
+            setState(false);
             await dataAPI.methods.deleteHouse(id)
             const router = useRouter();
             await router.push({ path: '/' });
@@ -161,6 +170,8 @@ export default {
             }
             this.house.hasGarage = this.hasGarage ? 'Yes' : 'No';
             setId(this.house.id);
+            this.showModal = getState();
+
         } catch (err) {
             console.log(err)
         }
@@ -179,9 +190,19 @@ export default {
     flex-direction: column;
 }
 
-.headerText {}
+.headerText {
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 22px;
+}
 
-.paragraphText {}
+.paragraphText {
+    font-family: 'open-sans';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+}
 
 .buttonDivider {
     display: flex;
@@ -247,6 +268,7 @@ export default {
     margin: 0;
     padding: 0;
     flex-direction: column;
+    position: relative;
 }
 
 .detailCard {
@@ -259,6 +281,10 @@ export default {
     width: 55%;
     height: max-content;
     background: #fff;
+    font-family: 'open-sans';
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16px;
 }
 
 .detailImage {
@@ -338,4 +364,134 @@ export default {
     width: 90%;
     padding: 0;
 }
-</style>
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.05);
+    z-index: 90;
+}
+
+.mobileButton {
+    display: none;
+}
+
+@media screen and (max-width: 650px),
+screen and (max-device-width: 650px) {
+    .icon {
+        height: 0.5rem;
+    }
+
+    .locationIcon {
+        height: 0.7rem;
+        width: 0.5rem;
+    }
+
+    .mainCard {
+        height: 100%;
+        width: 100%;
+        position: relative;
+    }
+
+    .desktop {
+        display: none;
+    }
+
+    .mobile {
+        display: block;
+        position: absolute;
+        top: 2rem;
+        left: 2rem;
+    }
+
+    .headerText {
+        font-size: 14px;
+    }
+
+    .paragraphText {
+        font-size: 12px;
+    }
+
+    .backButton {
+        z-index: 110;
+    }
+
+    .detailCard {
+        width: 100%;
+        height: 100%;
+    }
+
+    .detailImage {
+        height: 100%;
+        aspect-ratio: 3/2;
+        z-index: 10;
+    }
+
+    .detailCard {
+        width: 100%;
+        height: 100%;
+    }
+
+    .detailCardInfo {
+        width: 100%;
+        height: 100%;
+        border-top-right-radius: 3rem;
+        border-top-left-radius: 3rem;
+        z-index: 99;
+        margin-top: -3rem;
+        background: #ffffff;
+        display: flex;
+        align-items: start;
+        justify-content: center;
+        text-align: left;
+        flex-direction: column;
+        padding: 0;
+        font-size: 12px;
+    }
+
+    .titleClass {
+        padding-left: 2rem;
+        padding-right: -2rem;
+        padding-top: 2rem;
+    }
+
+    .row,
+    .descriptionRow {
+        padding-left: 2rem;
+        padding-right: -2rem;
+    }
+
+    .descriptionRow {
+        padding-bottom: 2rem;
+    }
+
+    .mobileButton {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 1rem;
+        justify-content: center;
+        gap: 1rem;
+        z-index: 999;
+        background: transparent;
+        flex-direction: row;
+    }
+
+    .mobileButtonDivider {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: right;
+        flex-direction: row;
+    }
+
+    .buttonsDivider {
+        display:none;
+    }
+}</style>

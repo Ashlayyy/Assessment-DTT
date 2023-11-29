@@ -58,5 +58,11 @@ export default {
   background-color: #EB5440;
   color: #FFFFFF;
 }
+
+@media screen and (max-width: 650px), screen and (max-device-width: 650px) { 
+  .sorterButton {
+    font-size: 12px;
+  }
+}
 </style>
   

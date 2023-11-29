@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="filter">
-            <i class="filterSearchIcon"><img class="searchImage" src="../components/icons/DTTIcons/ic_search@3x.png" alt="Search icon"></i>
+            <i class="filterSearchIcon"><img class="searchImage" src="../icons/DTTIcons/ic_search@3x.png" alt="Search icon"></i>
             <input type="text" class="filterSearchBox" id="search" v-model="searchTerm" @input="applyFilter" placeholder="Search for a house" />
-            <i @click="clearFilter" class="filterRemoveIcon" v-if="searchTerm != ''"><img class="clearImage" src="../components/icons/DTTIcons/ic_clear@3x.png" alt="Clear icon"></i>
+            <i @click="clearFilter" class="filterRemoveIcon" v-if="searchTerm != ''"><img class="clearImage" src="../icons/DTTIcons/ic_clear@3x.png" alt="Clear icon"></i>
         </div>
     </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
-  <RouterLink class="createNewLink" to="/create"> <button class="createButton"><img class="createButtonImage"
-        src="../components/icons/DTTIcons/ic_plus_white@3x.png" alt="Plus icon for create new button">Create New</button>
+  <RouterLink class="createNewLink desktop" to="/create"> <button class="createButton"><img class="createButtonImage"
+        src="../icons/DTTIcons/ic_plus_white@3x.png" alt="Plus icon for create new button">Create New</button>
   </RouterLink>
 </template>
   
@@ -42,6 +42,12 @@ export default {
 
 .createButtonImage {
   height: 90%;
+}
+
+@media screen and (max-width: 650px), screen and (max-device-width: 650px) {
+  .desktop {
+    display: none;
+  }
 }
 </style>
   

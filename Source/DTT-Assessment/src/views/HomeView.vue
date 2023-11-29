@@ -1,15 +1,17 @@
 <script>
-import HouseList from '../components/houseList.vue';
-import FilterComponent from '../components/filterComponent.vue';
-import createNewButton from '../components/createNewButton.vue';
-import sorterComponent from '../components/sorterComponent.vue';
+import HouseList from '../components/house/houseList.vue';
+import FilterComponent from '../components/house/filterComponent.vue';
+import createNewButton from '../components/buttons/createNewButton.vue';
+import sorterComponent from '../components/house/sorterComponent.vue';
+import mobileButton from '../components/buttons/mobileButton.vue';
 
 export default {
     components: {
         FilterComponent,
         HouseList,
         createNewButton,
-        sorterComponent
+        sorterComponent,
+        mobileButton
     },
     data() {
         return {
@@ -33,7 +35,10 @@ export default {
     <section class="home">
         <div class="upperHalf">
             <div class="dividerOne">
-                <h1 class="title">Houses</h1>
+                <div class="mobileDiv">
+                    <h1 class="title">Houses</h1>
+                    <mobileButton/>
+                </div>
                 <FilterComponent class="filterComponent" @filter-changed="handleEvent($event)" />
             </div>
             <div class="dividerTwo">
@@ -89,4 +94,30 @@ export default {
     font-style: normal;
     font-size: 32px;
 }
+
+@media screen and (max-width: 650px), screen and (max-device-width: 650px) {
+
+    .home {
+        padding: 2.5rem 2.5rem;
+    }
+    .upperHalf {
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .title {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .mobileDiv {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
 </style>

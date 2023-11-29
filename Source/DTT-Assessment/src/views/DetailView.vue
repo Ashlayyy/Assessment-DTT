@@ -1,5 +1,5 @@
 <script setup>
-    import detailComponent from '../components/detailComponent.vue';
+    import detailComponent from '../components/house/detailComponent.vue';
 </script>
 
 <template>
