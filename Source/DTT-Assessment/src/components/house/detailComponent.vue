@@ -1,81 +1,96 @@
 <template>
     <main class="mainCard">
-        <div class="backButton">
-            <goBackButton class="desktop" />
-            <goBackButton class="mobile" :message="' '" :color="'white'" />
-        </div>
-        <div class="mobileButton" v-if="house.madeByMe == true">
-            <div class="mobileButtonDivider">
-                <DeleteButton @click="deleted()" :mobile="true" />
-                <EditButton @click="setId(house.id)" :mobile="true" />
+        <section class="leftSide">
+            <div class="backButton">
+                <goBackButton class="desktop" />
+                <goBackButton class="mobile" :message="' '" :color="'white'" />
             </div>
-        </div>
-        <section class="detailCard" v-if="house.location.street != ''">
-            <img class="detailImage" :src="house.image" alt="Image of the house" />
-            <div class="detailCardInfo">
-                <section class="titleClass">
-                    <div class="titleRow" :class="house.madeByMe ? 'madeByMeRow' : ''">
-                        <h2 class="detailCardTitle">
-                            {{ house.location.street }} {{ house.location.houseNumber }}
-                            {{ house.location.houseNumberAddition ? houseNumberAddition : '' }}
-                        </h2>
-                        <div class="buttonsDivider" v-if="house.madeByMe == true">
-                            <EditButton @click="setId(house.id)" />
-                            <DeleteButton @click="deleted()" />
+            <div class="mobileButton" v-if="house.madeByMe == true">
+                <div class="mobileButtonDivider">
+                    <DeleteButton @click="deleted()" :mobile="true" />
+                    <EditButton @click="setId(house.id)" :mobile="true" />
+                </div>
+            </div>
+            <section class="detailCard" v-if="house.location.street != ''">
+                <img class="detailImage" :src="house.image" alt="Image of the house" />
+                <div class="detailCardInfo">
+                    <section class="titleClass">
+                        <div class="titleRow" :class="house.madeByMe ? 'madeByMeRow' : ''">
+                            <h2 class="detailCardTitle">
+                                {{ house.location.street }} {{ house.location.houseNumber }}
+                                {{ house.location.houseNumberAddition ? houseNumberAddition : '' }}
+                            </h2>
+                            <div class="buttonsDivider">
+                                <EditButton v-if="house.madeByMe == true" @click="setId(house.id)" />
+                                <DeleteButton v-if="house.madeByMe == true" @click="deleted()" />
+                                <favoriteButton v-if="house.madeByMe == false" @click="toggleFavorite(house.id)"
+                                    :active="contains(house.id)" />
+                            </div>
                         </div>
+                    </section>
+                    <div class="locationRow row">
+                        <span class="locationCollum collum">
+                            <img src="../icons/DTTIcons/ic_location@3x.png" alt="Location icon" class="locationIcon icon" />
+                            <p class="locationText textParagraphs">{{ house.location.zip }} {{ house.location.city }}</p>
+                        </span>
                     </div>
-                </section>
-                <div class="locationRow row">
-                    <span class="locationCollum collum">
-                        <img src="./icons/DTTIcons/ic_location@3x.png" alt="Location icon" class="locationIcon icon" />
-                        <p class="locationText textParagraphs">{{ house.location.zip }} {{ house.location.city }}</p>
-                    </span>
+                    <div class="secondRow row">
+                        <span class="priceCollum collum">
+                            <img src="../icons/DTTIcons/ic_price@3x.png" alt="Price icon" class="priceIcon icon" />
+                            <p class="priceText textParagraphs">
+                                {{ house.price }}
+                            </p>
+                        </span>
+                        <span class="sizeCollum collum">
+                            <img src="../icons/DTTIcons/ic_size@3x.png" alt="Size icon" class="sizeIcon icon" />
+                            <p class="sizeText textParagraphs">{{ house.size }} m2</p>
+                        </span>
+                        <span class="yearCollum collum">
+                            <img src="../icons/DTTIcons/ic_construction_date@3x.png" alt="Construction year icon"
+                                class="yearIcon icon" />
+                            <p class="yearText textParagraphs">Built in {{ house.constructionYear }}</p>
+                        </span>
+                    </div>
+                    <div class="thirdRow row">
+                        <span class="collum bedCollum">
+                            <img src="../icons/DTTIcons/ic_bed@3x.png" alt="Bed icon" class="bedIcon icon" />
+                            <p class="bedText textParagraphs">
+                                {{ house.rooms.bedrooms }}
+                            </p>
+                        </span>
+                        <span class="collum bathCollum">
+                            <img src="../icons/DTTIcons/ic_bath@3x.png" alt="Bath icon" class="bathIcon icon" />
+                            <p class="bathText textParagraphs">
+                                {{ house.rooms.bathrooms }}
+                            </p>
+                        </span>
+                        <span class="collum garageCollum">
+                            <img src="../icons/DTTIcons/ic_garage@3x.png" alt="Garage icon" class="garageIcon icon" />
+                            <p class="garageText textParagraphs">
+                                {{ house.hasGarage }}
+                            </p>
+                        </span>
+                    </div>
+                    <div class="descriptionRow">
+                        {{ house.description }}
+                    </div>
                 </div>
-                <div class="secondRow row">
-                    <span class="priceCollum collum">
-                        <img src="./icons/DTTIcons/ic_price@3x.png" alt="Price icon" class="priceIcon icon" />
-                        <p class="priceText textParagraphs">
-                            {{ house.price }}
-                        </p>
-                    </span>
-                    <span class="sizeCollum collum">
-                        <img src="./icons/DTTIcons/ic_size@3x.png" alt="Size icon" class="sizeIcon icon" />
-                        <p class="sizeText textParagraphs">{{ house.size }} m2</p>
-                    </span>
-                    <span class="yearCollum collum">
-                        <img src="./icons/DTTIcons/ic_construction_date@3x.png" alt="Construction year icon"
-                            class="yearIcon icon" />
-                        <p class="yearText textParagraphs">Built in {{ house.constructionYear }}</p>
-                    </span>
+                <div class="recommended mobile">
+                    <h2 class="header">
+                        Recommended for you
+                    </h2>
+                    <div class="divider">
+                        <recommendedComponent :id="house.id" :mobile="true" @changedId="reloadPage()"/>
+                    </div>
                 </div>
-                <div class="thirdRow row">
-                    <span class="collum bedCollum">
-                        <img src="./icons/DTTIcons/ic_bed@3x.png" alt="Bed icon" class="bedIcon icon" />
-                        <p class="bedText textParagraphs">
-                            {{ house.rooms.bedrooms }}
-                        </p>
-                    </span>
-                    <span class="collum bathCollum">
-                        <img src="./icons/DTTIcons/ic_bath@3x.png" alt="Bath icon" class="bathIcon icon" />
-                        <p class="bathText textParagraphs">
-                            {{ house.rooms.bathrooms }}
-                        </p>
-                    </span>
-                    <span class="collum garageCollum">
-                        <img src="./icons/DTTIcons/ic_garage@3x.png" alt="Garage icon" class="garageIcon icon" />
-                        <p class="garageText textParagraphs">
-                            {{ house.hasGarage }}
-                        </p>
-                    </span>
-                </div>
-                <div class="descriptionRow">
-                    {{ house.description }}
-                </div>
-            </div>
+            </section>
+            <section v-else>
+                <ClipLoader :color="'#cc181e'" :size="'5rem'" />
+            </section>
         </section>
-        <section v-else>
-            <ClipLoader :color="'#cc181e'" :size="'5rem'" />
-        </section>
+        <div class="recommended">
+            <recommendedComponent :id="house.id" @changedId="reloadPage()"/>
+        </div>
     </main>
     <appModel v-if="showModal" :showModal=showModal>
         <div class="overlay"></div>
@@ -111,8 +126,16 @@ import EditButton from '../buttons/EditButton.vue';
 import DeleteButton from '../buttons/DeleteButton.vue';
 import appModel from './modelCard.vue';
 import { useModalStore } from '../../stores/deleteModal';
+import { useFavoritesStore } from '../../stores/favorites.js';
+import favoriteButton from '../buttons/favoriteButton.vue';
+import { useHistoryStore } from '../../stores/history';
+import recommendedComponent from './recommendComponent.vue';
+
 const { returnId, setId } = useIdStore();
 const { setState, getState } = useModalStore();
+const { addFavorite, removeFavorite, contains } = useFavoritesStore();
+const { addToHistory, returnHistory } = useHistoryStore();
+removeFavorite(undefined)
 
 export default {
     data() {
@@ -127,7 +150,9 @@ export default {
         ClipLoader,
         EditButton,
         DeleteButton,
-        appModel
+        appModel,
+        favoriteButton,
+        recommendedComponent
     },
     methods: {
         async getHouse() {
@@ -136,6 +161,23 @@ export default {
         },
         setId(id) {
             setId(id);
+        },
+        contains(id) {
+            return contains(id);
+        },
+        async reloadPage () {
+            await this.getHouse();
+        },
+        toggleFavorite(id) {
+            const alreadyAdded = contains(id);
+            const element = document.getElementById('favoriteImage');
+            if (alreadyAdded) {
+                removeFavorite(id);
+                element.src = '/src/components/icons/favorites_button_inactive.png';
+            } else {
+                addFavorite(id);
+                element.src = '/src/components/icons/favorites_button_active.png';
+            }
         },
         deleted() {
             this.showModal = getState();
@@ -171,7 +213,7 @@ export default {
             this.house.hasGarage = this.hasGarage ? 'Yes' : 'No';
             setId(this.house.id);
             this.showModal = getState();
-
+            addToHistory(this.house.id);
         } catch (err) {
             console.log(err)
         }
@@ -180,6 +222,26 @@ export default {
 </script>
 
 <style scoped>
+.leftSide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 60%;
+    height: 100%;
+}
+
+.recommended {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    gap: 0.5rem;
+    width: 50%;
+}
+
 .textSection {
     height: max-content;
     display: flex;
@@ -255,7 +317,7 @@ export default {
 
 .backButton {
     display: flex;
-    width: 55%;
+    width: 60%;
     height: max-content;
 }
 
@@ -267,7 +329,7 @@ export default {
     align-items: center;
     margin: 0;
     padding: 0;
-    flex-direction: column;
+    flex-direction: row;
     position: relative;
 }
 
@@ -278,7 +340,7 @@ export default {
     padding: 0;
     margin: 0;
     flex-direction: column;
-    width: 55%;
+    width: 70%;
     height: max-content;
     background: #fff;
     font-family: 'open-sans';
@@ -325,7 +387,7 @@ export default {
 .titleRow {
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: space-between;
     flex-direction: row;
     width: 100%;
 }
@@ -375,7 +437,7 @@ export default {
     z-index: 90;
 }
 
-.mobileButton {
+.mobileButton, .mobile {
     display: none;
 }
 
@@ -394,6 +456,7 @@ screen and (max-device-width: 650px) {
         height: 100%;
         width: 100%;
         position: relative;
+        overflow: hidden;
     }
 
     .desktop {
@@ -422,6 +485,7 @@ screen and (max-device-width: 650px) {
     .detailCard {
         width: 100%;
         height: 100%;
+        flex-direction: column;
     }
 
     .detailImage {
@@ -492,6 +556,51 @@ screen and (max-device-width: 650px) {
     }
 
     .buttonsDivider {
-        display:none;
+        display: none;
     }
-}</style>
+
+    .mobile {
+        display: flex;
+    }
+
+    .leftSide {
+        width: 100%;
+        height: 100%;
+    }
+
+    .recommended {
+        display: none;
+        width: 0;
+    }
+    .recommended.mobile {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: left;
+        position: relative;
+        gap: 1rem;
+        top: 0;
+        left: 0;
+        margin: 0;
+        text-align: left;
+        background: #F6F6F6;
+    }
+
+    .header {
+        width: 100%;
+        text-align: left;
+        padding-left: 5rem;
+    }
+
+    .divider {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+}
+</style>

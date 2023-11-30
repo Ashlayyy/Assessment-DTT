@@ -5,7 +5,6 @@ import EditButton from '../buttons/EditButton.vue';
 import DeleteButton from '../buttons/DeleteButton.vue';
 import { useModalStore } from '../../stores/deleteModal';
 
-
 export default {
   components: {
     RouterLink,
@@ -29,19 +28,18 @@ export default {
   methods: {
     setId(id) {
       const { setId } = useIdStore();
-      if (id >= 2) setId(id); else console.log('Error with ID, too low')
+      if (id >= 2) setId(id); else console.log('Error with ID, too low');
     },
     deleteHouse() {
-      const { setState, getState } = useModalStore()
+      const { setState } = useModalStore()
       setState(true);
-      console.log(getState())
     }
   }
 };
 </script>
 
 <template>
-  <RouterLink class="router_link" to="/detail" @click="setId(id)">
+  <RouterLink class="router_link" to="/detail" @click="setId(id); this.$emit('changedId')">
     <div class="house-card">
       <img :src="picture" alt="House Image" class="house-image" />
       <div class="houseCardDetails">

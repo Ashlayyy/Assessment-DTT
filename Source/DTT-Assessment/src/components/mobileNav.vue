@@ -15,22 +15,22 @@ export default {
         imgElement.src = '/src/components/icons/DTTIcons/ic_mobile_navigarion_home@3x.png';
         aboutElement.src = '/src/components/icons/DTTIcons/ic_mobile_navigarion_info_active@3x.png';
         favoriteElement.src = '/src/components/icons/favorites_inactive.png';
-        listingElement.src = '/src/components/icons/favorites_inactive.png';
+        listingElement.src = '/src/components/icons/listings_inactive.png';
       } else if (to.fullPath == '/favorites') {
         imgElement.src = '/src/components/icons/DTTIcons/ic_mobile_navigarion_home@3x.png';
         aboutElement.src = '/src/components/icons/DTTIcons/ic_mobile_navigarion_info@3x.png';
         favoriteElement.src = '/src/components/icons/favorites_active.png';
-        listingElement.src = '/src/components/icons/favorites_active.png';
+        listingElement.src = '/src/components/icons/listings_inactive.png';
       } else if (to.fullPath == '/listings') {
         imgElement.src = '/src/components/icons/DTTIcons/ic_mobile_navigarion_home@3x.png';
         aboutElement.src = '/src/components/icons/DTTIcons/ic_mobile_navigarion_info@3x.png';
-        favoriteElement.src = '/src/components/icons/favorites_active.png';
-        listingElement.src = '/src/components/icons/favorites_active.png';
+        favoriteElement.src = '/src/components/icons/favorites_inactive.png';
+        listingElement.src = '/src/components/icons/listings_active.png';
       } else {
         imgElement.src = '/src/components/icons/DTTIcons/ic_mobile_navigarion_home_active@3x.png';
         aboutElement.src = '/src/components/icons/DTTIcons/ic_mobile_navigarion_info@3x.png';        
         favoriteElement.src = '/src/components/icons/favorites_inactive.png';
-        listingElement.src = '/src/components/icons/favorites_inactive.png';
+        listingElement.src = '/src/components/icons/listings_inactive.png';
       }
     }
   }
@@ -49,11 +49,11 @@ export default {
           alt="Info navigation icon" id="aboutImage">
       </RouterLink>
       <RouterLink class="header__link" to="/listings">
-        <img class="image" src="/src/components/icons/favorites_inactive.jpeg"
+        <img class="image" src="/src/components/icons/listings_inactive.png"
           alt="Info navigation icon" id="listingsImage">
       </RouterLink>
       <RouterLink class="header__link" to="/favorites">
-        <img class="image" src="/src/components/icons/favorites_inactive.jpeg"
+        <img class="image" src="/src/components/icons/favorites_inactive.png"
           alt="Info navigation icon" id="favoriteImage">
       </RouterLink>
     </nav>

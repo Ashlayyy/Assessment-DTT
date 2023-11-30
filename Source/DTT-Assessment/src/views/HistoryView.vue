@@ -40,7 +40,7 @@ export default {
                 <sorterComponent @sort-changed="handleSortEvent($event)"/>
             </div>
         </div>
-        <HouseList :searchString="searchTerm" :sorted="sorted" :favoritesOnly="true"/>
+        <HouseList :searchString="searchTerm" :sorted="sorted" :historyOnly="true"/>
     </section>
 </template>
 

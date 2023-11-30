@@ -1,5 +1,5 @@
 <script>
-import HouseList from '../components/house/houseList';
+import HouseList from '../components/house/houseList.vue';
 import FilterComponent from '../components/house/filterComponent.vue';
 import createNewButton from '../components/buttons/createNewButton.vue';
 import sorterComponent from '../components/house/sorterComponent.vue';

@@ -586,7 +586,7 @@ export default {
 <style scoped>
 .formSection {
     color: #4A4B4C;
-    background-image: url('./icons/DTTIcons/img_background@3x.png');
+    background-image: url('../icons/DTTIcons/img_background@3x.png');
     background-size: cover;
     height: max-content;
     display: flex;

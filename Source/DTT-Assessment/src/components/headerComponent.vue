@@ -7,10 +7,11 @@ const location = useRoute();
   <section id="header__section">
     <nav id="header">
       <img alt="DTT Logo" class="logo" src="./icons/DTTIcons/img_logo_dtt@3x.png" width="148" height="50" />
-      <RouterLink :class="location.path === '/' ? 'active' : ''" class="header__link" to="/">Home</RouterLink>
+      <RouterLink :class="location.path === '/' || location.path === '/edit' || location.path === '/create' || location.path === '/detail' ? 'active' : ''" class="header__link" to="/">Home</RouterLink>
       <RouterLink :class="location.path === '/about' ? 'active' : ''" class="header__link" to="/about">About</RouterLink>
       <RouterLink :class="location.path === '/listings' ? 'active' : ''" class="header__link" to="/listings">Listings</RouterLink>
       <RouterLink :class="location.path === '/favorites' ? 'active' : ''" class="header__link" to="/favorites">Favorites</RouterLink>
+      <RouterLink :class="location.path === '/history' ? 'active' : ''" class="header__link" to="/history">History</RouterLink>
     </nav>
   </section>
 </template>
@@ -41,7 +42,7 @@ const location = useRoute();
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 50%;
+  width: 75%;
 }
 
 .header__link {
