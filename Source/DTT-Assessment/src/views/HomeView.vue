@@ -1,23 +1,22 @@
 <script>
-import HouseList from '../components/house/houseList.vue';
-import FilterComponent from '../components/house/filterComponent.vue';
-import createNewButton from '../components/buttons/createNewButton.vue';
-import sorterComponent from '../components/house/sorterComponent.vue';
-import mobileButton from '../components/buttons/mobileButton.vue';
+import HouseList from '../components/house/HouseListComponent.vue';
+import FilterComponent from '../components/house/FilterComponent.vue';
+import CreateNewButton from '../components/buttons/CreateNewButton.vue';
+import SorterComponent from '../components/house/SorterComponent.vue';
+import MobileButton from '../components/buttons/MobileButton.vue';
 
 export default {
     components: {
         FilterComponent,
         HouseList,
-        createNewButton,
-        sorterComponent,
-        mobileButton
+        CreateNewButton,
+        SorterComponent,
+        MobileButton
     },
     data() {
         return {
-            houses: [],
             searchTerm: null,
-            sorted: 'price',
+            sorted: 'price'
         };
     },
     methods: {
@@ -37,13 +36,13 @@ export default {
             <div class="dividerOne">
                 <div class="mobileDiv">
                     <h1 class="title">Houses</h1>
-                    <mobileButton/>
+                    <MobileButton/>
                 </div>
                 <FilterComponent class="filterComponent" @filter-changed="handleEvent($event)" />
             </div>
             <div class="dividerTwo">
-                <createNewButton />
-                <sorterComponent @sort-changed="handleSortEvent($event)"/>
+                <CreateNewButton />
+                <SorterComponent @sort-changed="handleSortEvent($event)"/>
             </div>
         </div>
         <HouseList :searchString="searchTerm" :sorted="sorted"/>
@@ -56,8 +55,9 @@ export default {
     flex-direction: column;
     gap: 2rem;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     padding: 2rem 15rem 5rem 15rem;
+    min-height: 100vh;
 }
 
 .upperHalf {

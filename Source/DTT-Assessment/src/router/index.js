@@ -30,13 +30,14 @@ const router = createRouter({
       component: () => import('../views/CreateView.vue')
     },
     {
-      path: '/detail',
+      path: '/detail/:id',
       name: 'detail',
       component: () => import('../views/DetailView.vue')
     },
     {
-      path: '/edit',
+      path: '/edit/:id',
       name: 'edit',
+      onError: (err) =>console.log(err),
       component: () => import('../views/EditView.vue')
     },
     {

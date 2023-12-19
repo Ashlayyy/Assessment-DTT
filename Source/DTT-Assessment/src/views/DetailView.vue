@@ -1,9 +1,9 @@
 <script setup>
-    import detailComponent from '../components/house/detailComponent.vue';
+    import DetailComponent from '../components/house/DetailComponent.vue';
 </script>
 
 <template>
-    <detailComponent />
+    <DetailComponent />
 </template>
 
 <style scoped>

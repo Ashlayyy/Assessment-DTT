@@ -18,3 +18,27 @@
     "constructionYear": 2000,
     "hasGarage": false,
     "madeByMe": false
+
+
+{
+    'id': '',
+    'image': '',
+    'price': '',
+    'rooms': {
+        'bedrooms': '',
+        'bathrooms': ''
+    },
+    'size': '',
+    'description': '',
+    'location': {
+        'street': '',
+        'houseNumber': '',
+        'houseNumberAddition': null,
+        'city': '',
+        'zip': ''
+    },
+    'createdAt': '',
+    'constructionYear': '',
+    'hasGarage': false,
+    'madeByMe': false
+}

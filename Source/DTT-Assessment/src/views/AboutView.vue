@@ -26,7 +26,7 @@
                 Design and Development
             </h3>
             <div class="divider">
-                <img src="../components/icons/DTTIcons/img_logo_dtt@3x.png" alt="Logo DTT" class="logo">
+                <img src="../assets/icons/DTTIcons/img_logo_dtt@3x.png" alt="Logo DTT" class="logo">
                 <p class="textDivider">
                     By DTT
                     <a target="_blank" href="https://www.d-tt.nl" class="link">www.d-tt.nl</a>
@@ -40,6 +40,7 @@
 .textMain {
     width: 100%;
     height: 100%;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,7 +78,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.25rem;
     flex-direction: column;
 }
 

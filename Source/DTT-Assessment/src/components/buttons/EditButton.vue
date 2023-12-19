@@ -1,6 +1,6 @@
 <template>
-    <RouterLink class="editLink" to="/edit"> <button class="editButton" :class="mobile == true ? 'mobile' : ''"><img class="editButtonImage"
-        :src="mobile == true ? '/src/components/icons/DTTIcons/ic_edit_white@3x.png' : '/src/components/icons/DTTIcons/ic_edit@3x.png'" alt="Icon for edit"></button>
+    <RouterLink class="editLink" :to="{ name: 'edit', params: { id: this.id }}"> <button class="editButton" :class="mobile == true ? 'mobile' : ''"><img class="editButtonImage"
+        :src="mobile == true ? '/src/assets/icons/DTTIcons/ic_edit_white@3x.png' : '/src/assets/icons/DTTIcons/ic_edit@3x.png'" alt="Icon for edit"></button>
     </RouterLink>
 </template>
     
@@ -12,7 +12,8 @@ export default {
         RouterLink
     },
     props: {
-        mobile: Boolean
+        mobile: Boolean,
+        id: Number
     }
 }
 </script>

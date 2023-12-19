@@ -1,7 +1,7 @@
 <template>
   <div class="mobileDivider">
     <button class="deleteButton" :class="mobile == true ? 'mobile' : ''"><img class="deleteButtonImage"
-        :src="mobile == true ? '/src/components/icons/DTTIcons/ic_delete_white@3x.png' : '/src/components/icons/DTTIcons/ic_delete@3x.png'"
+        :src="mobile == true ? '/src/assets/icons/DTTIcons/ic_delete_white@3x.png' : '/src/assets/icons/DTTIcons/ic_delete@3x.png'"
         alt="Icon for delete"></button>
   </div>
 </template>

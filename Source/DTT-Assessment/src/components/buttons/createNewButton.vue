@@ -1,6 +1,6 @@
 <template>
   <RouterLink class="createNewLink desktop" to="/create"> <button class="createButton"><img class="createButtonImage"
-        src="../icons/DTTIcons/ic_plus_white@3x.png" alt="Plus icon for create new button">Create New</button>
+        src="../../assets/icons/DTTIcons/ic_plus_white@3x.png" alt="Plus icon for create new button">Create New</button>
   </RouterLink>
 </template>
   

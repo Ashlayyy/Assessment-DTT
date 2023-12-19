@@ -1,11 +1,15 @@
 <script>
 import { RouterLink } from 'vue-router';
-import { useIdStore } from '../../stores/id';
 import EditButton from '../buttons/EditButton.vue';
 import DeleteButton from '../buttons/DeleteButton.vue';
-import { useModalStore } from '../../stores/deleteModal';
+import { useModalStore } from '../../stores/DeleteModal';
 
 export default {
+  data: () => {
+    return {
+      houseNumberAdditiveChecked: ''
+    }
+  },
   components: {
     RouterLink,
     EditButton,
@@ -26,10 +30,6 @@ export default {
     made: Boolean
   },
   methods: {
-    setId(id) {
-      const { setId } = useIdStore();
-      if (id >= 2) setId(id); else console.log('Error with ID, too low');
-    },
     deleteHouse() {
       const { setState } = useModalStore()
       setState(true);
@@ -37,34 +37,34 @@ export default {
   }
 };
 </script>
-
 <template>
-  <RouterLink class="router_link" to="/detail" @click="setId(id); this.$emit('changedId')">
+  <RouterLink class="router_link" :to="{ name: 'detail', params: { id: this.id } }">
     <div class="house-card">
       <img :src="picture" alt="House Image" class="house-image" />
       <div class="houseCardDetails">
         <div class="house-details">
-          <h3 class="blackText">{{ streetName }} {{ houseNumber }} {{ houseNumberAddition ? houseNumberAddition : '' }}</h3>
+          <h3 class="blackText">{{ streetName }} {{ houseNumber }} {{ houseNumberAdditive !== null || houseNumberAdditive !== undefined || houseNumberAdditive !== 'null' ?
+            houseNumberAdditive : ' ' }}</h3>
           <p class="blackText">€ {{ priceDisplay }}</p>
           <p>{{ zipCode }} {{ city }}</p>
           <div class="property-icons">
             <div class="property-icon">
-              <img src="../icons/DTTIcons/ic_bed@3x.png" alt="Bedroom Icon" />
+              <img src="../../assets/icons/DTTIcons/ic_bed@3x.png" alt="Bedroom Icon" />
               <p>{{ bedrooms }}</p>
             </div>
             <div class="property-icon">
-              <img src="../icons/DTTIcons/ic_bath@3x.png" alt="Bathroom Icon" />
+              <img src="../../assets/icons/DTTIcons/ic_bath@3x.png" alt="Bathroom Icon" />
               <p>{{ bathrooms }}</p>
             </div>
             <div class="property-icon">
-              <img src="../icons/DTTIcons/ic_size@3x.png" alt="Size Icon" />
+              <img src="../../assets/icons/DTTIcons/ic_size@3x.png" alt="Size Icon" />
               <p>{{ size }} m2</p>
             </div>
           </div>
         </div>
         <div v-if="this.made == true" class="buttons">
           <div class="buttonsDivider" v-if="this.made == true">
-            <EditButton @click="setId(id)" />
+            <EditButton :id=id />
             <DeleteButton @click="deleteHouse()" />
           </div>
         </div>
@@ -74,7 +74,6 @@ export default {
 </template>
 
 <style scoped>
-
 .buttonsDivider {
   display: flex;
   align-items: center;
@@ -112,7 +111,7 @@ export default {
 
 .house-image {
   max-height: 9rem;
-  aspect-ratio: 3/2;
+  aspect-ratio: 4/3;
   border-radius: 8px;
 }
 
@@ -141,6 +140,7 @@ export default {
   max-height: 25px;
   line-height: 1rem;
 }
+
 .houseCardDetails {
   display: flex;
   align-items: start;
@@ -148,31 +148,32 @@ export default {
   width: 100%;
 }
 
-@media screen and (max-width: 650px), screen and (max-device-width: 650px) {
+@media screen and (max-width: 650px),
+screen and (max-device-width: 650px) {
   .house-card {
     gap: 0.5rem;
     font-size: 12px;
   }
 
   .house-image {
-    aspect-ratio: 1/1;
+    aspect-ratio: 4/3;
     max-width: 5rem;
     padding: 0;
   }
 
   .buttonsDivider {
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  flex-direction: row;
-  height: 2.5rem;
-  width: 100%;
-  gap: 0.25rem;
-}
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    flex-direction: row;
+    height: 2.5rem;
+    width: 100%;
+    gap: 0.25rem;
+  }
 
-.property-icon img {
-  height: 15px;
-  aspect-ratio: 1/1;
-}
+  .property-icon img {
+    height: 15px;
+    aspect-ratio: 1/1;
+  }
 }
 </style>

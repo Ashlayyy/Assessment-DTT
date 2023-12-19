@@ -1,6 +1,6 @@
 <template>
   <button class="favoriteButton"><img id="favoriteImage" class="favoriteButtonImage"
-      :src="active == false ? '/src/components/icons/favorites_inactive.png' :  mobile == true? '/src/components/icons/favorites_button_active.png' : '/src/components/icons/favorites_active.png'"
+      :src="active == false ? '/src/assets/icons/favorites_inactive.png' :  mobile == true ? '/src/assets/icons/favorites_button_active.png' : '/src/assets/icons/favorites_active.png'"
       alt="Icon for favorite">
   </button>
 </template>

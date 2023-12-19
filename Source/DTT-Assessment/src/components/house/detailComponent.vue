@@ -5,23 +5,25 @@
                 <goBackButton class="desktop" />
                 <goBackButton class="mobile" :message="' '" :color="'white'" />
             </div>
-            <div class="mobileButton" v-if="house.madeByMe == true">
+            <div class="mobileButton">
                 <div class="mobileButtonDivider">
-                    <DeleteButton @click="deleted()" :mobile="true" />
-                    <EditButton @click="setId(house.id)" :mobile="true" />
+                    <DeleteButton v-if="house.madeByMe == true" @click="deleted()" :mobile="true" />
+                    <EditButton v-if="house.madeByMe == true" @click="setId(house.id)" :mobile="true" />
+                    <favoriteButton v-if="house.madeByMe == false" @click="toggleFavorite(house.id)"
+                        :active="contains(house.id)" :mobile="true"/>
                 </div>
             </div>
-            <section class="detailCard" v-if="house.location.street != ''">
+            <section class="detailCard" v-if="house.location != ''">
                 <img class="detailImage" :src="house.image" alt="Image of the house" />
                 <div class="detailCardInfo">
                     <section class="titleClass">
                         <div class="titleRow" :class="house.madeByMe ? 'madeByMeRow' : ''">
                             <h2 class="detailCardTitle">
-                                {{ house.location.street }} {{ house.location.houseNumber }}
-                                {{ house.location.houseNumberAddition ? houseNumberAddition : '' }}
+                                {{ house?.location?.street }} {{ house?.location?.houseNumber }}
+                                {{ houseNumberAddition ? houseNumberAddition : '' }}
                             </h2>
                             <div class="buttonsDivider">
-                                <EditButton v-if="house.madeByMe == true" @click="setId(house.id)" />
+                                <EditButton :id="house.id" v-if="house.madeByMe == true"/>
                                 <DeleteButton v-if="house.madeByMe == true" @click="deleted()" />
                                 <favoriteButton v-if="house.madeByMe == false" @click="toggleFavorite(house.id)"
                                     :active="contains(house.id)" />
@@ -30,49 +32,52 @@
                     </section>
                     <div class="locationRow row">
                         <span class="locationCollum collum">
-                            <img src="../icons/DTTIcons/ic_location@3x.png" alt="Location icon" class="locationIcon icon" />
-                            <p class="locationText textParagraphs">{{ house.location.zip }} {{ house.location.city }}</p>
+                            <img src="../../assets/icons/DTTIcons/ic_location@3x.png" alt="Location icon"
+                                class="locationIcon icon" />
+                            <p class="locationText textParagraphs">{{ house?.location?.zip }} {{ house?.location?.city }}</p>
                         </span>
                     </div>
                     <div class="secondRow row">
                         <span class="priceCollum collum">
-                            <img src="../icons/DTTIcons/ic_price@3x.png" alt="Price icon" class="priceIcon icon" />
+                            <img src="../../assets/icons/DTTIcons/ic_price@3x.png" alt="Price icon"
+                                class="priceIcon icon" />
                             <p class="priceText textParagraphs">
-                                {{ house.price }}
+                                {{ house?.price }}
                             </p>
                         </span>
                         <span class="sizeCollum collum">
-                            <img src="../icons/DTTIcons/ic_size@3x.png" alt="Size icon" class="sizeIcon icon" />
-                            <p class="sizeText textParagraphs">{{ house.size }} m2</p>
+                            <img src="../../assets/icons/DTTIcons/ic_size@3x.png" alt="Size icon" class="sizeIcon icon" />
+                            <p class="sizeText textParagraphs">{{ house?.size }} m2</p>
                         </span>
                         <span class="yearCollum collum">
-                            <img src="../icons/DTTIcons/ic_construction_date@3x.png" alt="Construction year icon"
+                            <img src="../../assets/icons/DTTIcons/ic_construction_date@3x.png" alt="Construction year icon"
                                 class="yearIcon icon" />
-                            <p class="yearText textParagraphs">Built in {{ house.constructionYear }}</p>
+                            <p class="yearText textParagraphs">Built in {{ house?.constructionYear }}</p>
                         </span>
                     </div>
                     <div class="thirdRow row">
                         <span class="collum bedCollum">
-                            <img src="../icons/DTTIcons/ic_bed@3x.png" alt="Bed icon" class="bedIcon icon" />
+                            <img src="../../assets/icons/DTTIcons/ic_bed@3x.png" alt="Bed icon" class="bedIcon icon" />
                             <p class="bedText textParagraphs">
-                                {{ house.rooms.bedrooms }}
+                                {{ house?.rooms?.bedrooms }}
                             </p>
                         </span>
                         <span class="collum bathCollum">
-                            <img src="../icons/DTTIcons/ic_bath@3x.png" alt="Bath icon" class="bathIcon icon" />
+                            <img src="../../assets/icons/DTTIcons/ic_bath@3x.png" alt="Bath icon" class="bathIcon icon" />
                             <p class="bathText textParagraphs">
-                                {{ house.rooms.bathrooms }}
+                                {{ house?.rooms?.bathrooms }}
                             </p>
                         </span>
                         <span class="collum garageCollum">
-                            <img src="../icons/DTTIcons/ic_garage@3x.png" alt="Garage icon" class="garageIcon icon" />
+                            <img src="../../assets/icons/DTTIcons/ic_garage@3x.png" alt="Garage icon"
+                                class="garageIcon icon" />
                             <p class="garageText textParagraphs">
-                                {{ house.hasGarage }}
+                                {{ house?.hasGarage }}
                             </p>
                         </span>
                     </div>
                     <div class="descriptionRow">
-                        {{ house.description }}
+                        {{ house?.description }}
                     </div>
                 </div>
                 <div class="recommended mobile">
@@ -80,7 +85,7 @@
                         Recommended for you
                     </h2>
                     <div class="divider">
-                        <recommendedComponent :id="house.id" :mobile="true" @changedId="reloadPage()"/>
+                        <recommendedComponent :id="house.id" :mobile="true" @changedId="reloadPage()" />
                     </div>
                 </div>
             </section>
@@ -89,7 +94,7 @@
             </section>
         </section>
         <div class="recommended">
-            <recommendedComponent :id="house.id" @changedId="reloadPage()"/>
+            <recommendedComponent :id="house.id" @changedId="reloadPage()" />
         </div>
     </main>
     <appModel v-if="showModal" :showModal=showModal>
@@ -117,24 +122,21 @@
 </template>
 
 <script>
-import { useRouter } from 'vue-router';
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue';
-import { useIdStore } from '../../stores/id';
-import goBackButton from '../buttons/goBackButton.vue';
-import dataAPI from '../data/dataAPI.vue';
+import goBackButton from '../buttons/GoBackButton.vue';
 import EditButton from '../buttons/EditButton.vue';
 import DeleteButton from '../buttons/DeleteButton.vue';
-import appModel from './modelCard.vue';
+import appModel from './ModelComponent.vue';
 import { useModalStore } from '../../stores/deleteModal';
 import { useFavoritesStore } from '../../stores/favorites.js';
-import favoriteButton from '../buttons/favoriteButton.vue';
+import favoriteButton from '../buttons/FavoriteButton.vue';
 import { useHistoryStore } from '../../stores/history';
-import recommendedComponent from './recommendComponent.vue';
+import recommendedComponent from './RecommendComponent.vue';
+import API from '../data/API.js';
 
-const { returnId, setId } = useIdStore();
 const { setState, getState } = useModalStore();
 const { addFavorite, removeFavorite, contains } = useFavoritesStore();
-const { addToHistory, returnHistory } = useHistoryStore();
+const { addToHistory } = useHistoryStore();
 removeFavorite(undefined)
 
 export default {
@@ -154,18 +156,18 @@ export default {
         favoriteButton,
         recommendedComponent
     },
+    props: {
+        houseNumberAdditio: String
+    },
     methods: {
         async getHouse() {
-            const house = await dataAPI.methods.getOneHouse(returnId())
+            const house = await API.getOneHouse(this.$route.params.id)
             this.house = house[0];
-        },
-        setId(id) {
-            setId(id);
         },
         contains(id) {
             return contains(id);
         },
-        async reloadPage () {
+        async reloadPage() {
             await this.getHouse();
         },
         toggleFavorite(id) {
@@ -173,10 +175,10 @@ export default {
             const element = document.getElementById('favoriteImage');
             if (alreadyAdded) {
                 removeFavorite(id);
-                element.src = '/src/components/icons/favorites_button_inactive.png';
+                element.src = '/src/assets/icons/favorites_button_inactive.png';
             } else {
                 addFavorite(id);
-                element.src = '/src/components/icons/favorites_button_active.png';
+                element.src = '/src/assets/icons/favorites_button_active.png';
             }
         },
         deleted() {
@@ -184,12 +186,9 @@ export default {
             if (this.showModal != true) this.showModal = true;
         },
         async deleteHouse(id) {
-            setId(id);
             setState(false);
-            await dataAPI.methods.deleteHouse(id)
-            const router = useRouter();
-            await router.push({ path: '/' });
-            window.location.reload();
+            await API.deleteHouse(id)
+            this.$router.go({ name: 'home' })
         }
     },
     async created() {
@@ -210,12 +209,12 @@ export default {
             else {
                 this.houseNumberAddition = this.house.location.houseNumberAddition;
             }
-            this.house.hasGarage = this.hasGarage ? 'Yes' : 'No';
-            setId(this.house.id);
+            this.house.hasGarage = this.house.hasGarage ? 'Yes' : 'No';
             this.showModal = getState();
             addToHistory(this.house.id);
         } catch (err) {
-            console.log(err)
+            this.$router.push('/');
+            console.error(err);
         }
     }
 }
@@ -317,7 +316,7 @@ export default {
 
 .backButton {
     display: flex;
-    width: 60%;
+    width: 70%;
     height: max-content;
 }
 
@@ -326,11 +325,12 @@ export default {
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     margin: 0;
     padding: 0;
     flex-direction: row;
     position: relative;
+    padding-top: 2rem;
 }
 
 .detailCard {
@@ -437,7 +437,8 @@ export default {
     z-index: 90;
 }
 
-.mobileButton, .mobile {
+.mobileButton,
+.mobile {
     display: none;
 }
 
@@ -455,6 +456,10 @@ screen and (max-device-width: 650px) {
     .mainCard {
         height: 100%;
         width: 100%;
+        top: -0.5rem;
+        left: 0;
+        padding: 0;
+        margin: 0;
         position: relative;
         overflow: hidden;
     }
@@ -553,6 +558,7 @@ screen and (max-device-width: 650px) {
         width: 100%;
         justify-content: right;
         flex-direction: row;
+        gap: 1rem
     }
 
     .buttonsDivider {
@@ -572,6 +578,7 @@ screen and (max-device-width: 650px) {
         display: none;
         width: 0;
     }
+
     .recommended.mobile {
         width: 100%;
         height: 100vh;

@@ -12,7 +12,7 @@
 </template>
 <script>
   export default {
-    name: 'app-modal',
+    name: 'DeleteModal',
     props: {
         showModal: Boolean
     }

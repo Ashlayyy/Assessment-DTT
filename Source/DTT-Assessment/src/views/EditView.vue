@@ -1,9 +1,9 @@
 <script setup>
-    import formComponent from '../components/house/formComponent.vue';
+    import FormComponent from '../components/house/FormComponent.vue';
 </script>
 
 <template>
-    <formComponent :mode="'edit'"/>
+    <FormComponent :mode="'edit'"/>
 </template>
 
 <style scoped>

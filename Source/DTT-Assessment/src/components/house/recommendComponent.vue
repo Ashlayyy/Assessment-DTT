@@ -1,13 +1,13 @@
 <template>
-    <houseList class="list" :id="id" :recommended="true" :mobile="mobile" :class="mobile ? 'mobile': ''" @changeId="this.$emit('changedId')"/>
+    <HouseList class="list" :id="id" :recommended="true" :mobile="mobile" :class="mobile ? 'mobile': ''" @changeId="this.$emit('changedId')"/>
 </template>
   
 <script>
-import houseList from './houseList.vue';
+import HouseList from './HouseListComponent.vue';
 
 export default {
     components: {
-        houseList
+        HouseList
     },
     props: {
         id: Number,

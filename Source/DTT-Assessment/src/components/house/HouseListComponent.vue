@@ -1,9 +1,9 @@
 <script>
-import HouseCard from './houseCard.vue';
-import dataAPI from '../data/dataAPI.vue';
+import HouseCard from './HouseCardComponent.vue';
+import API from '../data/API.js';
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue';
-import { useFavoritesStore } from '../../stores/favorites.js';
-import { useHistoryStore } from '../../stores/history';
+import { useFavoritesStore } from '../../stores/Favorites.js';
+import { useHistoryStore } from '../../stores/History';
 
 
 export default {
@@ -44,7 +44,7 @@ export default {
 
     methods: {
         async getData() {
-            const final = await dataAPI.methods.getData();
+            const final = await API.getData();
             this.houses = final;
             this.filteredHouses = this.houses;
             this.loaded = true;
@@ -87,52 +87,7 @@ export default {
             return Math.floor(Math.random() * max);
         },
         recommend() {
-            const houseIndex = this.filteredHouses.indexOf(this.id);
 
-            let array = [];
-            let secondArray = [];
-            let thirdArray = [];
-
-            let goSecondRound = false;
-            let goThirdRound = false;
-
-            for (let i = 0; i < 3; i++) {
-                array.push(this.filteredHouses[houseIndex + i]);
-            }
-
-            for (let i = 0; i < array.length; i++) {
-                if (array[i] == undefined) goSecondRound = true;
-            }
-            if (goSecondRound == true) {
-                for (let i = 0; i < 3; i++) {
-                    secondArray.push(this.filteredHouses[houseIndex + 2 + i]);
-                }
-                for (let i = 0; i < secondArray.length; i++) {
-                    if (secondArray[i] == undefined) goThirdRound = true;
-                }
-            }
-            if (goThirdRound == true) {
-                for (let i = 0; i < 3; i++) {
-                    thirdArray.push(this.filteredHouses[houseIndex - 1 - i]);
-                }
-                for (let i = 0; i < thirdArray.length; i++) {
-                    if (thirdArray[i] == undefined) goThirdRound = true;
-                }
-            }
-
-            if (goSecondRound == false && goThirdRound == false) {
-                this.filteredHouses = array;
-                this.noRecommends = false;
-            } else if (goSecondRound == true && goThirdRound == false) {
-                this.filteredHouses = secondArray;
-                this.noRecommends = false;
-            } else if (goSecondRound == true && goThirdRound == true) {
-                this.filteredHouses = thirdArray;
-                this.noRecommends = false;
-            } else {
-                this.filteredHouses = '';
-                this.noRecommends = true;
-            }
         },
         useHistory() {
             const { returnHistory } = useHistoryStore();
@@ -196,7 +151,7 @@ export default {
                 </div>
                 <div v-else>
                     <div class="mobileDiv">
-                        <img class="image" src="../icons/DTTIcons/img_empty_houses@3x.png" alt="No houses found!"
+                        <img class="image" src="../../assets/icons/DTTIcons/img_empty_houses@3x.png" alt="No houses found!"
                             height="200" width="500">
                         <p class="houseText">
                             No results.
@@ -225,7 +180,7 @@ export default {
                 </div>
                 <div v-else>
                     <div class="mobileDiv">
-                        <img class="image" src="../icons/DTTIcons/img_empty_houses@3x.png" alt="No houses found!"
+                        <img class="image" src="../../assets/icons/DTTIcons/img_empty_houses@3x.png" alt="No houses found!"
                             height="200" width="500">
                         <p class="houseText">
                             No results.
@@ -238,15 +193,17 @@ export default {
                 </div>
             </ul>
             <ul v-else-if="recommended == true" class="houseListElement">
-                <div v-if="noRecommends == false" class="houseListDiv">
-                    <li class="houseCardLi" v-for="house in filteredHouses" :key="house.id"
-                        @click="console.log(house.id, 'hi')">
+                <div v-if="noRecommends == false" class="houseListDiv recommended">
+                    <h2 class="recommendedHeader">
+                        Recommended for you
+                    </h2>
+                    <li class="houseCardLi" v-for="house in filteredHouses" :key="house.id" @click="this.$router.go(`/detail/${house.id}`)">
                         <HouseCard :class="mobile ? 'mobile' : ''" :streetName="house.location.street"
                             :priceDisplay="house.newPrice" :picture="house.image" :zipCode="house.location.zip"
                             :houseNumber="house.location.houseNumber"
                             :houseNumberAdditive="house.location.houseNumberAddition" :bedrooms="house.rooms.bedrooms"
                             :bathrooms="house.rooms.bathrooms" :size="house.size" :city="house.location.city" :id="house.id"
-                            :made="house.madeByMe" @changedId="this.$emit('changeId')" />
+                            :made="house.madeByMe" />
                     </li>
                 </div>
                 <div v-else>
@@ -278,7 +235,7 @@ export default {
                 <ClipLoader :color="'#cc181e'" :size="'5rem'" />
             </div>
             <div v-else class="mobileDiv">
-                <img class="image" src="../icons/DTTIcons/img_empty_houses@3x.png" alt="No houses found!" height="200"
+                <img class="image" src="../../assets/icons/DTTIcons/img_empty_houses@3x.png" alt="No houses found!" height="200"
                     width="500">
                 <p class="houseText">
                     No results found.
@@ -325,6 +282,23 @@ export default {
     justify-content: center;
     gap: 1rem;
     flex-direction: column;
+}
+
+.houseListDiv.recommended {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    text-align: left;
+    gap: 1rem;
+    flex-direction: column;
+}
+
+.recommendedHeader {
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 22px;
 }
 
 .houseCardLi {

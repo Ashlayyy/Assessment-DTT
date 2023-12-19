@@ -1,13 +1,13 @@
 <script>
-import HouseList from '../components/house/houseList.vue';
-import FilterComponent from '../components/house/filterComponent.vue';
-import sorterComponent from '../components/house/sorterComponent.vue';
+import HouseList from '../components/house/HouseListComponent.vue';
+import FilterComponent from '../components/house/FilterComponent.vue';
+import SorterComponent from '../components/house/SorterComponent.vue';
 
 export default {
     components: {
         FilterComponent,
         HouseList,
-        sorterComponent,
+        SorterComponent,
     },
     data() {
         return {
@@ -37,7 +37,7 @@ export default {
                 <FilterComponent class="filterComponent" @filter-changed="handleEvent($event)" />
             </div>
             <div class="dividerTwo">
-                <sorterComponent @sort-changed="handleSortEvent($event)"/>
+                <SorterComponent @sort-changed="handleSortEvent($event)"/>
             </div>
         </div>
         <HouseList :searchString="searchTerm" :sorted="sorted" :favoritesOnly="true"/>
@@ -50,8 +50,9 @@ export default {
     flex-direction: column;
     gap: 2rem;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     padding: 2rem 15rem 5rem 15rem;
+    min-height: 100vh;
 }
 
 .upperHalf {

@@ -1,7 +1,7 @@
 <script setup>
 import { RouterView } from 'vue-router';
-import Header from './components/headerComponent.vue';
-import mobileNav from './components/mobileNav.vue';
+import Header from './components/HeaderComponent.vue';
+import MobileNav from './components/MobileNavComponent.vue';
 
 </script>
 
@@ -9,7 +9,7 @@ import mobileNav from './components/mobileNav.vue';
   <div class="body">
     <Header class="desktopNav" />
     <RouterView />
-    <mobileNav class="mobileNav"/>
+    <MobileNav class="mobileNav"/>
   </div>
 </template>
 
