@@ -1,0 +1,1 @@
+import{F as e}from"./FormComponent-9d7812ff.js";import{o,g as r}from"./index-fdd09552.js";import"./GoBackButton-11155276.js";const s={__name:"CreateView",setup(t){return(a,m)=>(o(),r(e,{mode:"create"}))}};export{s as default};

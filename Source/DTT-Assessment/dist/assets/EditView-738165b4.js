@@ -1,0 +1,1 @@
+import{F as o}from"./FormComponent-9d7812ff.js";import{o as e,g as t}from"./index-fdd09552.js";import"./GoBackButton-11155276.js";const s={__name:"EditView",setup(r){return(m,a)=>(e(),t(o,{mode:"edit"}))}};export{s as default};
