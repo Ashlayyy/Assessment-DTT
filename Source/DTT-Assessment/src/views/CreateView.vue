@@ -1,11 +1,9 @@
 <script setup>
-    import FormComponent from '../components/house/FormComponent.vue';
+import FormComponent from '../components/house/FormComponent.vue'
 </script>
 
 <template>
-    <FormComponent :mode="'create'"/>
+  <FormComponent :mode="'create'" />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

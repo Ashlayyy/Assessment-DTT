@@ -1,8 +1,8 @@
 <script>
-import { RouterLink } from 'vue-router';
-import EditButton from '../buttons/EditButton.vue';
-import DeleteButton from '../buttons/DeleteButton.vue';
-import { useModalStore } from '../../stores/DeleteModal';
+import { RouterLink } from 'vue-router'
+import EditButton from '../buttons/EditButton.vue'
+import DeleteButton from '../buttons/DeleteButton.vue'
+import { useModalStore } from '../../stores/DeleteModal'
 
 export default {
   data: () => {
@@ -18,7 +18,8 @@ export default {
   props: {
     streetName: String,
     city: String,
-    priceDisplay: String, Number,
+    priceDisplay: String,
+    Number,
     picture: String,
     zipCode: String,
     houseNumber: Number,
@@ -32,10 +33,10 @@ export default {
   methods: {
     deleteHouse() {
       const { setState } = useModalStore()
-      setState(true);
+      setState(true)
     }
   }
-};
+}
 </script>
 <template>
   <RouterLink class="router_link" :to="{ name: 'detail', params: { id: this.id } }">
@@ -43,8 +44,16 @@ export default {
       <img :src="picture" alt="House Image" class="house-image" />
       <div class="houseCardDetails">
         <div class="house-details">
-          <h3 class="blackText">{{ streetName }} {{ houseNumber }} {{ houseNumberAdditive !== null || houseNumberAdditive !== undefined || houseNumberAdditive !== 'null' ?
-            houseNumberAdditive : ' ' }}</h3>
+          <h3 class="blackText">
+            {{ streetName }} {{ houseNumber }}
+            {{
+              houseNumberAdditive !== null ||
+              houseNumberAdditive !== undefined ||
+              houseNumberAdditive !== 'null'
+                ? houseNumberAdditive
+                : ' '
+            }}
+          </h3>
           <p class="blackText">€ {{ priceDisplay }}</p>
           <p>{{ zipCode }} {{ city }}</p>
           <div class="property-icons">
@@ -64,7 +73,7 @@ export default {
         </div>
         <div v-if="this.made == true" class="buttons">
           <div class="buttonsDivider" v-if="this.made == true">
-            <EditButton :id=id />
+            <EditButton :id="id" />
             <DeleteButton @click="deleteHouse()" />
           </div>
         </div>
@@ -102,7 +111,7 @@ export default {
   font-weight: 500;
   font-style: normal;
   font-size: 16px;
-  color: #4A4B4C;
+  color: #4a4b4c;
 }
 
 .blackText {
@@ -148,8 +157,7 @@ export default {
   width: 100%;
 }
 
-@media screen and (max-width: 650px),
-screen and (max-device-width: 650px) {
+@media screen and (max-width: 650px), screen and (max-device-width: 650px) {
   .house-card {
     gap: 0.5rem;
     font-size: 12px;

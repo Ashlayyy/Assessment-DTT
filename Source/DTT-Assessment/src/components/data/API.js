@@ -1,5 +1,5 @@
 const headers = {
-  'X-Api-Key': '5gYzjH2QcGXEqSZv_Fk6pmW8-3hfJTDo',
+  'X-Api-Key': '5gYzjH2QcGXEqSZv_Fk6pmW8-3hfJTDo'
 }
 
 export default {
@@ -34,7 +34,7 @@ export default {
         method: 'delete',
         headers: headers
       })
-      return true;
+      return true
     } catch (error) {
       console.error('Error deleting house data:', error)
       return error
@@ -62,7 +62,7 @@ export default {
         headers: headers,
         body: photoData ? photoData : ''
       })
-      return true;
+      return true
     } catch (error) {
       console.error('Error creating image data:', error)
       return error
@@ -70,7 +70,7 @@ export default {
   },
   editHouse: async (id, formData) => {
     try {
-      const response = await fetch(`https://api.intern.d-tt.nl/api/houses`, {
+      const response = await fetch(`https://api.intern.d-tt.nl/api/houses/${id}`, {
         method: 'post',
         headers: headers,
         body: formData ? formData : ''

@@ -7,18 +7,18 @@ export const useFavoritesStore = defineStore({
   }),
   actions: {
     returnFavorites() {
-      return this.$state.favorites;
+      return this.$state.favorites
     },
-    addFavorite (favoriteId) {
-        this.$state.favorites.push(favoriteId)
+    addFavorite(favoriteId) {
+      this.$state.favorites.push(favoriteId)
     },
-    contains (id) {
-      const index = this.$state.favorites.indexOf(id);
-      return index == -1 ? false : true;
+    contains(id) {
+      const index = this.$state.favorites.indexOf(id)
+      return index == -1 ? false : true
     },
-    removeFavorite (favoriteId) {
-        const index = this.$state.favorites.indexOf(favoriteId);
-        this.$state.favorites.splice(index, 1);
+    removeFavorite(favoriteId) {
+      const index = this.$state.favorites.indexOf(favoriteId)
+      this.$state.favorites.splice(index, 1)
     }
   }
 })

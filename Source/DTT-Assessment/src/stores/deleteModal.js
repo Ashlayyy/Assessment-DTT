@@ -9,8 +9,8 @@ export const useModalStore = defineStore({
     getState() {
       return this.$state.showModal
     },
-    setState (state) {
-      this.$state.showModal = state;
+    setState(state) {
+      this.$state.showModal = state
     }
   }
 })

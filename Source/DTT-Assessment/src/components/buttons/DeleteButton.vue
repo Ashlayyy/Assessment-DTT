@@ -1,11 +1,19 @@
 <template>
   <div class="mobileDivider">
-    <button class="deleteButton" :class="mobile == true ? 'mobile' : ''"><img class="deleteButtonImage"
-        :src="mobile == true ? '/src/assets/icons/DTTIcons/ic_delete_white@3x.png' : '/src/assets/icons/DTTIcons/ic_delete@3x.png'"
-        alt="Icon for delete"></button>
+    <button class="deleteButton" :class="mobile == true ? 'mobile' : ''">
+      <img
+        class="deleteButtonImage"
+        :src="
+          mobile == true
+            ? '/src/assets/icons/DTTIcons/ic_delete_white@3x.png'
+            : '/src/assets/icons/DTTIcons/ic_delete@3x.png'
+        "
+        alt="Icon for delete"
+      />
+    </button>
   </div>
 </template>
-    
+
 <script>
 export default {
   props: {
@@ -13,7 +21,7 @@ export default {
   }
 }
 </script>
-    
+
 <style scoped>
 .editLink {
   text-decoration: none;
@@ -36,8 +44,7 @@ export default {
   height: 90%;
 }
 
-@media screen and (max-width: 650px),
-screen and (max-device-width: 650px) {
+@media screen and (max-width: 650px), screen and (max-device-width: 650px) {
   .deleteButton {
     height: 1rem;
     width: 1rem;
@@ -48,4 +55,3 @@ screen and (max-device-width: 650px) {
   }
 }
 </style>
-    

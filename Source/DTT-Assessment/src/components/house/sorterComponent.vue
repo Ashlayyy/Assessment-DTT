@@ -1,30 +1,44 @@
 <template>
-    <div class="sorterDivider">
-        <button :class="{ active_button: selectedOption === 'price' }" @click="handleClickPrice" id="buttonSorterPrice" class="sorterButtonPrice sorterButton">Price</button>
-        <button :class="{ active_button: selectedOption === 'size' }" @click="handleClickSize" id="buttonSorterSize" class="sorterButtonSize sorterButton">Size</button>
-    </div>
+  <div class="sorterDivider">
+    <button
+      :class="{ active_button: selectedOption === 'price' }"
+      @click="handleClickPrice"
+      id="buttonSorterPrice"
+      class="sorterButtonPrice sorterButton"
+    >
+      Price
+    </button>
+    <button
+      :class="{ active_button: selectedOption === 'size' }"
+      @click="handleClickSize"
+      id="buttonSorterSize"
+      class="sorterButtonSize sorterButton"
+    >
+      Size
+    </button>
+  </div>
 </template>
-  
+
 <script>
 export default {
-    data() {
+  data() {
     return {
-      selectedOption: 'price',
-    };
-    },
-    methods: {
-        handleClickPrice () {
-            this.selectedOption = 'price';
-            this.$emit('sort-changed', this.selectedOption);
-        },
-        handleClickSize () {
-            this.selectedOption = 'size';
-            this.$emit('sort-changed', this.selectedOption);
-        }
+      selectedOption: 'price'
     }
+  },
+  methods: {
+    handleClickPrice() {
+      this.selectedOption = 'price'
+      this.$emit('sort-changed', this.selectedOption)
+    },
+    handleClickSize() {
+      this.selectedOption = 'size'
+      this.$emit('sort-changed', this.selectedOption)
+    }
+  }
 }
 </script>
-  
+
 <style scoped>
 .sorterDivider {
   display: flex;
@@ -37,7 +51,7 @@ export default {
   padding: 10px;
   width: 10rem;
   cursor: pointer;
-  color: #FFFFFF;
+  color: #ffffff;
   font-family: 'Montserrat';
   font-weight: 700;
   font-style: normal;
@@ -45,24 +59,23 @@ export default {
 }
 
 .sorterButtonPrice {
-    border-top-left-radius: 0.3rem;
-    border-bottom-left-radius: 0.3rem;
+  border-top-left-radius: 0.3rem;
+  border-bottom-left-radius: 0.3rem;
 }
 
-.sorterButtonSize{
-    border-top-right-radius: 0.3rem;
-    border-bottom-right-radius: 0.3rem;
+.sorterButtonSize {
+  border-top-right-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
 }
 
 .active_button {
-  background-color: #EB5440;
-  color: #FFFFFF;
+  background-color: #eb5440;
+  color: #ffffff;
 }
 
-@media screen and (max-width: 650px), screen and (max-device-width: 650px) { 
+@media screen and (max-width: 650px), screen and (max-device-width: 650px) {
   .sorterButton {
     font-size: 12px;
   }
 }
 </style>
-  

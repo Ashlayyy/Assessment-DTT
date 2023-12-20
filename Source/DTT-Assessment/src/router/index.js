@@ -37,7 +37,7 @@ const router = createRouter({
     {
       path: '/edit/:id',
       name: 'edit',
-      onError: (err) =>console.log(err),
+      onError: (err) => console.log(err),
       component: () => import('../views/EditView.vue')
     },
     {

@@ -1,20 +1,18 @@
 <script setup>
-import { RouterView } from 'vue-router';
-import Header from './components/HeaderComponent.vue';
-import MobileNav from './components/MobileNavComponent.vue';
-
+import { RouterView } from 'vue-router'
+import Header from './components/HeaderComponent.vue'
+import MobileNav from './components/MobileNavComponent.vue'
 </script>
 
 <template>
   <div class="body">
     <Header class="desktopNav" />
     <RouterView />
-    <MobileNav class="mobileNav"/>
+    <MobileNav class="mobileNav" />
   </div>
 </template>
 
 <style scoped>
-
 .body {
   min-height: 100vh;
   height: 100%;

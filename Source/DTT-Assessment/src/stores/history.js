@@ -8,21 +8,24 @@ export const useHistoryStore = defineStore({
   }),
   actions: {
     returnHistory() {
-      return this.$state.history;
+      return this.$state.history
     },
-    addToHistory (id) {
-      if (this.$state.history.length == 5) {this.removeFirstHistory()};
+    addToHistory(id) {
+      if (this.$state.history.length == 5) {
+        this.removeFirstHistory()
+      }
       this.$state.history.push(id)
     },
-    contains (id) {
-      const index = this.$state.history.indexOf(id);
-      return index == -1 ? false : true;
+    contains(id) {
+      const index = this.$state.history.indexOf(id)
+      return index == -1 ? false : true
     },
-    removeFirstHistory () {
-        this.$state.history.splice(0, 1);
+    removeFirstHistory() {
+      this.$state.history.splice(0, 1)
     },
-    setLimit (limit) {
-      if (limit) this.$state.limit = limit; else this.$state.limit = 5;
+    setLimit(limit) {
+      if (limit) this.$state.limit = limit
+      else this.$state.limit = 5
     }
   }
 })
